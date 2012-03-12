@@ -1,0 +1,290 @@
+/* This probably won't validate since I had to use -moz vendor extensions... */
+//http://tympanus.net/codrops/2011/12/07/splash-and-coming-soon-page-effects-with-css3/
+
+$highlight_color: #ffd512;
+$tbot_color1: #25a2d6;
+
+// main colors
+$tbot_color2: saturate(darken($tbot_color1, 10), 10);
+$tbot_color3: saturate(darken($tbot_color2, 10), 10);
+$tbot_color4: saturate(darken($tbot_color3, 10), 10);
+$tbot_color5: darken($tbot_color3, 5); // border
+
+// hover colors
+$tbot_hover1: desaturate(lighten($tbot_color1, 5), 10); //f37873
+$tbot_hover2: saturate(darken($tbot_hover1, 5), 5); //db504d
+$tbot_hover3: saturate(darken($tbot_hover2, 5), 15); //cb0500
+$tbot_hover4: saturate(darken($tbot_hover3, 20), 10); //a20601
+
+@import "index.webfonts";
+@import "index.localfonts";
+
+$font_opensans: 'Open Sans', 'Open Sans local', sans-serif;
+$font_asap: 'Asap', 'Asap local', sans-serif;
+$font_leckerli: 'Leckerli One', 'Leckerli One local', cursive;
+
+/* ------------------- */
+/* ------------------- */
+body {
+    background-color: #000;
+    font-family: $font_opensans;
+}
+
+// animation styles
+@-moz-keyframes blurzoomin_blurzoomout_white {
+    0%{
+        opacity: 0;
+        shadow: 0px 0px 40px #fff;
+        -moz-transform: scale(1.5);
+    }
+    20%,75%{
+        opacity: 1;
+        text-shadow: 0px 0px 1px #fff;
+        -moz-transform: scale(1);
+    }
+    100%{
+        opacity: 0;
+        text-shadow: 0px 0px 50px #fff;
+        -moz-transform: scale(0);
+    }
+}
+
+@-moz-keyframes blurzoomin_blurzoomout_orange {
+    0%{
+        opacity: 0;
+        text-shadow: 0px 0px 50px $highlight_color; //#ffd512;
+        -moz-transform: scale(0);
+    }
+    40%,50%{
+        opacity: 1;
+        text-shadow: 0px 0px 1px $highlight_color; //#ffd512;
+        -moz-transform: scale(1);
+    }
+    100%{
+        opacity: 0;
+        shadow: 0px 0px 40px $highlight_color; //#ffd512;
+        -moz-transform: scale(1.5);
+    }
+}
+
+@-moz-keyframes fadein_stay {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0.3;
+    }
+}
+
+body {
+    overflow: hidden;
+}
+
+/* ------------------- */
+/* ------------------- */
+/* animation timings and types */
+.container {
+    .content {
+        h2 {
+            // types
+            &.frame1, &.frame2 {
+                -moz-animation: blurzoomin_blurzoomout_white 2s ease-in backwards;
+            }
+            &.frame3, &.frame4, &.frame5 {
+                -moz-animation: blurzoomin_blurzoomout_white 1.5s ease-in backwards;                
+            }
+            &.frame6 {
+                -moz-animation: blurzoomin_blurzoomout_orange 1s linear;                
+            }
+
+
+            // timings
+            &.frame1 {
+                -moz-animation-delay: 0.5s;
+            }
+
+            &.frame2 {
+                -moz-animation-delay: 2s;
+            }
+
+            &.frame3 {
+                -moz-animation-delay: 3.5s;
+            }
+            &.frame4 {
+                -moz-animation-delay: 4.5s;
+            }
+            &.frame5 {
+                -moz-animation-delay: 5.5s;
+            }
+            &.frame6 {
+                -moz-animation-delay: 5.5s;
+            }
+        }
+
+        .bgimage {
+            -moz-animation: fadein_stay 4s linear backwards;
+            -moz-animation-delay: 3s;
+            //-moz-animation-delay: 0s;
+        }
+
+        .main {
+            -moz-animation: fadein_stay 0.5s linear backwards;
+            -moz-animation-delay: 7s;
+            //-moz-animation-delay: 0s;
+        }
+    }
+}
+
+/* ------------------- */
+/* ------------------- */
+/* page styling */
+.container {
+    .content {
+        .bgimage {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: transparent url('bg.jpg') no-repeat bottom left;
+
+            opacity: 0.3;
+        }
+
+        h2 {
+            $h2size: 6em;
+
+            font-size: $h2size;
+            text-align: center;
+            color: transparent;
+
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            line-height: $h2size;
+            height: $h2size;
+            margin-top: $h2size * -1 / 2;
+        }
+
+        .main {
+            z-index: 999;
+
+            width: 100%;
+            top: 50px;
+            position: absolute;
+
+            $center_width: 500px;
+            .center {
+                width: $center_width;
+                margin: 0px auto;
+
+                .box {
+                    background: url('bgtransparent.png') repeat;
+                    border: 1px solid #222;
+                    box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+                    border-radius: 4px;
+                    width: $center_width;
+
+                    h1 {
+                        text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.9);
+
+                        font-family: $font_asap;
+
+                        color: #fff;
+                        z-index: 9999;
+                        text-align: center;
+
+                        span {
+                            vertical-align: middle;
+
+                            font-size: 3em;
+                            font-family: $font_leckerli;
+                        }
+                    }
+
+                    p {
+                        text-align: center;
+                        font-size: 1.2em;
+                        font-weight: normal;
+                        line-height: 2em;
+
+                        padding-left: 2em;
+                        padding-right: 2em;
+                        color: #fff;
+
+                        em {
+                            font-family: $font_leckerli;
+                            font-size: 1.2em;
+                            padding-right: .1em;
+                            padding-left: .2em;
+                        }
+                    }
+
+                    p, h1 span {
+                        em {
+                            font-style: normal;
+                            color: $highlight_color;
+                        }
+                    }
+                }
+
+                .bottom {                
+                    text-align: center;
+                    margin-top: 3em;
+                    width: $center_width;
+
+                    a {
+                        font-weight: bold;
+
+                        text-align: center;
+                        z-index: 99999;
+                        width: 400px;
+
+                        text-decoration: none;
+                        padding-left: 1em;
+                        padding-right: 1em;
+
+                        font-size: 1.4em;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+/* ------------------- */
+/* ------------------- */
+/* omgz the button */
+.button {
+    border: 1px solid $tbot_color5;
+    color: #fff;
+
+    background-color: $tbot_color1;
+    background-image: -moz-linear-gradient(top, $tbot_color1 0%, $tbot_color2 50%, $tbot_color3 50%, $tbot_color4 100%);
+    background-image: linear-gradient(top, $tbot_color1 0%, $tbot_color2 50%, $tbot_color3 50%, $tbot_color4 100%);
+
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    -moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4), 0 1px 3px #333333;
+    box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4), 0 1px 3px #333333;
+
+    padding: 12px 0 14px 0;
+    width: 150px; 
+
+    line-height: 1;
+    text-align: center;
+    text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.button:hover, .button:active {
+    cursor: pointer;
+
+    -moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4);
+    box-shadow: inset 0px 0px 0px 1px rgba(255, 115, 100, 0.4); 
+
+    background-color: $tbot_hover1;
+    background-image: -moz-linear-gradient(top, $tbot_hover1 0%, $tbot_hover2 50%, $tbot_hover3 50%, $tbot_hover4 100%);
+    background-image: linear-gradient(top, $tbot_hover1 0%, $tbot_hover2 50%, $tbot_hover3 50%, $tbot_hover4 100%);
+}

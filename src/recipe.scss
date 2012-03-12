@@ -1,0 +1,126 @@
+// Settings:
+//      ze colors n tingz
+$header_color: #A4A400;
+$header_bg: #F0F0F0;
+$header_fontfam: "Century Gothic", Futura, Verdana, sans-serif;
+
+$body_bg: #fff;
+$body_color: #404040;
+$body_fontfam: Georgia, Garamond, serif;
+
+$quote_bg: #FFFFC8;
+
+$font_size_body: 12pt;
+$font_size_h1: 24pt;
+$font_size_h2: 20pt;
+
+// mixins
+@mixin unlistify {
+    ul {
+        /* Make a list look like normal text, with each item on its own line */
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-top: 1em;
+
+        li {
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
+
+// over-all page stylings
+body {
+    background-color: $body_bg;
+    background-image: url('http://www.cs.washington.edu/education/courses/cse190m/09sp/homework/1/silverware.jpg');
+    background-attachment: fixed;
+    background-repeat: repeat;
+
+    color: $body_color;
+
+    font-size: $font_size_body;
+    font-family: $body_fontfam;
+}
+
+a {
+    color: $header_color;
+}
+
+h1, h2 {
+    background-color: $header_bg;
+
+    color: $header_color;
+
+    font-family: $header_fontfam;
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: $font_size_h1;
+    font-weight: bold;
+
+    text-align: center;
+}
+
+h2 {
+    font-size: $font_size_h2;
+    font-weight: normal;
+
+    text-align: left;
+    text-transform: uppercase;
+}
+
+// styles per page sections
+.container {
+    .contents {
+        .recipe_intro {
+            @include unlistify;
+        }
+
+        .ingredients {
+            ul {
+                list-style-image: url('http://www.cs.washington.edu/education/courses/cse190m/09sp/homework/1/pie_icon.gif');
+            }
+        }
+
+        .directions {
+            ol {
+                li {
+                    strong {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .usercomments {
+            blockquote {
+                font-style: italic;
+                background-color: $quote_bg;
+
+                .author {
+                    margin-top: 1em;
+                    
+                    &:before {
+                        content:"- ";
+                    }
+                }
+            }
+        }
+
+        .links {
+            @include unlistify;
+        }
+
+        .validators {
+            margin-top: 1em;
+
+            img {
+                border-style: solid;
+                border-color: $header_color;
+                border-width: 2px;
+            }
+        }
+    }
+}
